@@ -6,9 +6,13 @@ int main()
 	char b[]={"hello"};
 	char c[]={"not hello"};
 
-	if (strcmp(a, b)==1) {
+	if (strcmp(a, b)) {
 		return 1;
 	} else {
-		return 0;
+		if (strcmp(a, c)< 0) {
+			return 0;
+		} else {
+			return 1;
+		}
 	}
 }
