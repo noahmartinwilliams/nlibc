@@ -4,6 +4,7 @@
 
 _start:
 	call main
+	movl %eax, %ebx
 	movl $1, %eax
-	xorl %ebx, %ebx
+	#xorl %ebx, %ebx
 	int $0x80
