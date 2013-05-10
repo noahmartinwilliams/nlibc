@@ -14,7 +14,7 @@ SHARE=ld -nostdlib -share $^ -o $@
 loader.o: $(ARC)/loader.s
 	$(AS)
 
-tests: test-file-write
+tests: test-file-write test-string-strcmp
 	echo "tests complete"
 
 libc.so: libc.a
@@ -26,8 +26,16 @@ file.o: $(ARC)/file.s
 test-file-%: tests/file/%.c loader.o libc.a 
 	$(CMB)
 	./tests/file/$@-wrapper
-libc.a: file.o
+
+test-string-%: tests/string/%.c loader.o libc.a
+	$(CMB)
+	./tests/string/$@-wrapper
+
+libc.a: file.o string.o
 	$(AR)
+
+%.o: $(ARC)/%.s
+	$(AS)
 
 %.o: %.c
 	$(CMP)
