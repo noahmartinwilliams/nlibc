@@ -1,3 +1,11 @@
 #! /bin/bash
 
 ./test-proc-exit
+RET=$?
+
+if [ "$RET" = "1" ];
+then
+	exit 0;
+else
+	exit 1;
+fi
