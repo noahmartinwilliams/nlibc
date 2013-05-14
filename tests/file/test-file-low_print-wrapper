@@ -1,0 +1,10 @@
+#! /bin/bash
+
+MSG=$(./test-file-low_print)
+
+if [ "$MSG" = "hello" ];
+then
+	exit 0;
+else
+	exit 1;
+fi

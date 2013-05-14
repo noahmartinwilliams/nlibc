@@ -1,8 +1,8 @@
-#include "io.h"
+#include "file.h"
 
 int main()
 {
 	char buf[]={"hello\n"};
-	write(1, buf, 6);
+	low_print(buf);
 	return 0;
 }

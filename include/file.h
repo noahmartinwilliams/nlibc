@@ -1,6 +1,7 @@
 #ifndef __FILE_H__
 #define __FILE_H__
 
-extern int write(int fd, char *buf, int count);
+#include "io.h"
+#include "lfile.h"
 
 #endif
