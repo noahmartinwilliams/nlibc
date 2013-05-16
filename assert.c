@@ -13,5 +13,5 @@ void __assert_fail(char *expr, char *file, char *line)
 	low_print(expr);
 	low_print("' failed\n");
 	low_print("\n");
-	exit(134);
+	exit(135);
 }

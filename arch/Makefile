@@ -1,5 +1,6 @@
 #! /usr/bin/make
 
+INCLUDE=../include/
 include ../include/config.mk
 
 

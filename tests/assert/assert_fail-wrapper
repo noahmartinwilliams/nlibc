@@ -1,0 +1,12 @@
+#! /bin/bash
+
+./test-assert_fail
+
+RET=$?
+
+if [ "$RET" = 135 ];
+then
+	exit 0;
+else
+	exit 1;
+fi
