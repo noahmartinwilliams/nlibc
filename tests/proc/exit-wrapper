@@ -1,6 +1,6 @@
 #! /bin/bash
 
-./test-proc-exit
+./test-exit
 RET=$?
 
 if [ "$RET" = "1" ];
