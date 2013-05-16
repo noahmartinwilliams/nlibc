@@ -1,6 +1,6 @@
 #! /bin/bash
 
-MSG=$(./test-file-low_print)
+MSG=$(./test-write)
 
 if [ "$MSG" = "hello" ];
 then
