@@ -1,15 +1,6 @@
 #! /usr/bin/make
 
-LIBRARY_PATH := ${LIBRARY_PATH}:./
-CC=gcc -I ./include -ffreestanding -nostdlib -nodefaultlibs 
-OBJ=$$(echo "$^" | sed 's/[[:space:]\+]/\n/g' | grep '.*\.[aoc]' | sed 's/\n/ /g')
-CMP=$(CC) -c $(OBJ) -o $@
-CMB=$(CC) $(OBJ) -o $@ 
-ARC=arch/x86
-LD=ld $^ -o $@
-AS=as $^ -o $@
-AR=ar rc $@ $^
-SHARE=ld -nostdlib -share $^ -o $@
+include ./include/config.mk
 
 loader.o: $(ARC)/loader.s
 	$(AS)
