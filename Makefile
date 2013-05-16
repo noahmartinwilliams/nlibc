@@ -2,45 +2,41 @@
 
 include ./include/config.mk
 
-loader.o: $(ARC)/loader.s
-	$(AS)
 
 tests: test-file-write test-string-strcmp test-proc-exit test-file-low_print test-assert-assert_fail
 	echo "tests complete"
 
-libc.so: libc.a
+libc.so: libc.a arch/asm.a
 	$(SHARE)
 
-file.o: $(ARC)/file.s
-	$(AS)
-
-test-file-%: tests/file/%.c loader.o libc.a 
+test-file-%: tests/file/%.c libc.a arch/asm.a
 	$(CMB)
 	./tests/file/$@-wrapper
 
-test-string-%: tests/string/%.c loader.o libc.a
+test-string-%: tests/string/%.c  libc.a arch/asm.a
 	$(CMB)
 	./tests/string/$@-wrapper
 
-test-proc-%: tests/proc/%.c loader.o libc.a
+test-proc-%: tests/proc/%.c  libc.a arch/asm.a
 	$(CMB)
 	./tests/proc/$@-wrapper
 
-test-assert-%: tests/assert/%.c loader.o libc.a
+test-assert-%: tests/assert/%.c libc.a arch/asm.a
 	$(CMB)
 	./tests/assert/$@-wrapper
 
-libc.a: file.o string.o proc.o file2.o assert.o
+libc.a: string.o file2.o assert.o 
 	$(AR)
 
-%.o: $(ARC)/%.s
-	$(AS)
+arch/asm.a:
+	$(MAKE) -C arch/ asm.a
 
 %.o: %.c
 	$(CMP)
 	
 
 clean:
+	$(MAKE) -C arch/ clean
 	rm -f *.o
 	rm -f *.so
 	rm -f test-*
