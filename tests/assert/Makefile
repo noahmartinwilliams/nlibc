@@ -3,7 +3,7 @@
 INCLUDE=../../include/
 include ../../include/config.mk
 
-test: test-assert_fail
+test: test-assert_fail test-assert_succeed
 	echo "assert tests complete"
 
 test-%: %.c ../../libc.a ../../arch/asm.a
