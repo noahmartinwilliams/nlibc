@@ -6,7 +6,15 @@ source ../../include/tmp.sh
 
 if [ -f './tmp/a' ];
 then
-	exit 0;
+	mode=$(ls -l ./tmp/a)	
+	echo $mode | grep 'rwx.*' >>/dev/null
+	RET=$?
+	if [ "$RET" = "0" ];
+	then
+		exit 0;
+	else
+		exit 1;
+	fi
 else
 	exit 1;
 fi
