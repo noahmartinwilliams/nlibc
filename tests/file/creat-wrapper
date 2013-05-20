@@ -2,6 +2,7 @@
 
 source ../../include/tmp.sh
 
+umask 0000
 MSG=$(./test-creat)
 echo "$MSG"
 
@@ -33,4 +34,18 @@ testmode ./tmp/d '.*-r--------.*'
 testmode ./tmp/e '.*--wx------.*'
 testmode ./tmp/f '.*--w-------.*'
 testmode ./tmp/g '.*---x------.*'
-testmode ./tmp/h '.*----r-x---.*'
+testmode ./tmp/h '.*----------.*'
+testmode ./tmp/i '.*----rwx---.*'
+testmode ./tmp/j '.*----rw----.*'
+testmode ./tmp/k '.*----r-x---.*'
+testmode ./tmp/l '.*----r-----.*'
+testmode ./tmp/m '.*-----wx---.*'
+testmode ./tmp/n '.*-----w----.*'
+testmode ./tmp/o '.*------x---.*'
+testmode ./tmp/p '.*-------rwx.*'
+testmode ./tmp/q '.*-------rw-.*'
+testmode ./tmp/r '.*-------r-x.*'
+testmode ./tmp/s '.*-------r--.*'
+testmode ./tmp/t '.*--------wx.*'
+testmode ./tmp/u '.*--------w-.*'
+testmode ./tmp/v '.*---------x.*'
