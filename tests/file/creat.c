@@ -2,6 +2,6 @@
 
 int main()
 {
-	creat("./tmp/a", 0777);
+	creat("./tmp/a", 0700);
 	return 0;
 }

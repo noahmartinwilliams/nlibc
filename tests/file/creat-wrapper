@@ -7,7 +7,7 @@ source ../../include/tmp.sh
 if [ -f './tmp/a' ];
 then
 	mode=$(ls -l ./tmp/a)	
-	echo $mode | grep 'rwx.*' >>/dev/null
+	echo $mode | grep '.*-rwx------.*' >>/dev/null
 	RET=$?
 	if [ "$RET" = "0" ];
 	then
