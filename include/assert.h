@@ -2,7 +2,7 @@
 #define __ASSERT_H__
 #include "stddef.h"
 #define __STRING2(x) __STRING(x)
-extern void __assert_fail(char *expr, char *file, char *line, char *function);
+extern void __assert_fail(char *expr, char *file, char *line, const char *function);
 # define assert(expr)					\
   ((expr)						\
    ? (void) (0)						\
