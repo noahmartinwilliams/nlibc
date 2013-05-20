@@ -51,3 +51,18 @@ creat:
 	movl %ebp, %esp
 	popl %ebp
 	ret
+
+.globl umask
+.type umask, @function
+
+umask:
+	pushl %ebp
+	movl %esp, %ebp
+	.equ mode, 8
+
+	movl $60, %eax
+	movl mode(%ebp), %ebx
+	int $0x80
+	movl %ebp, %esp
+	popl %ebp
+	ret
