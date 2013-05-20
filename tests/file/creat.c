@@ -8,6 +8,7 @@ int main()
 	creat("./tmp/d", 0400);
 	creat("./tmp/e", 0300);
 	creat("./tmp/f", 0200);
-	creat("./tmp/g", 0050);
+	creat("./tmp/g", 0100);
+	creat("./tmp/h", 0050);
 	return 0;
 }
