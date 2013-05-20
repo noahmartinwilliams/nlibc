@@ -33,3 +33,21 @@ close:
 	movl %ebp, %esp
 	popl %ebp
 	ret
+
+.globl creat
+.type creat, @function
+
+creat:
+	pushl %ebp
+	movl %esp, %ebp
+	.equ name, 8
+	.equ mode, 12
+	
+	movl $8, %eax
+	movl name(%ebp), %ebx
+	movl mode(%ebp), %ecx
+	int $0x80
+
+	movl %ebp, %esp
+	popl %ebp
+	ret

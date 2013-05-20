@@ -3,7 +3,7 @@
 INCLUDE=../../include/
 include ../../include/config.mk
 
-test: test-write test-low_print test-close
+test: test-write test-low_print test-close test-creat
 	echo "file tests complete"
 
 test-%: %.c ../../libc.a ../../arch/asm.a

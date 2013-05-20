@@ -1,0 +1,12 @@
+#! /bin/bash
+
+source ../../include/tmp.sh
+
+./test-creat
+
+if [ -f './tmp/a' ];
+then
+	exit 0;
+else
+	exit 1;
+fi
