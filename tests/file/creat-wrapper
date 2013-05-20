@@ -2,7 +2,8 @@
 
 source ../../include/tmp.sh
 
-./test-creat
+MSG=$(./test-creat)
+echo "$MSG"
 
 function testmode {
 	FILE=$1

@@ -23,7 +23,7 @@ test-proc:
 	$(MAKE) -C tests/proc/ test
 
 
-libc.a: string.o file2.o assert.o  
+libc.a: string.o file2.o assert.o errno.o
 	$(AR)
 
 arch/asm.a:
