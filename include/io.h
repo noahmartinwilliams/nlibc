@@ -6,5 +6,6 @@ extern int write(int fd, char *buf, int count);
 extern int close(int fd);
 extern int creat(const char* name, int mode);
 extern mode_t umask(mode_t newmask);
+extern int chmod(char *name, mode_t mode);
 #endif
 

@@ -66,3 +66,21 @@ umask:
 	movl %ebp, %esp
 	popl %ebp
 	ret
+
+.globl chmod
+.type chmod, @function
+
+chmod:
+	pushl %ebp
+	movl %esp, %ebp
+	.equ name, 8
+	.equ mode, 12
+
+	movl name(%ebp), %ebx
+	movl mode(%ebp), %ecx
+	movl $15, %eax
+	int $0x80
+
+	movl %ebp, %esp
+	popl %ebp
+	ret
