@@ -8,7 +8,7 @@ test: test-write test-low_print
 
 test-%: %.c ../../libc.a ../../arch/asm.a
 	$(CMB)
-	./$(WRAP)-wrapper
+	if [ -f "./$(WRAP)-wrapper" ]; then ./$(WRAP)-wrapper; else ./$@; fi
 
 ../../libc.a: 
 	$(MAKE) -C ../../ libc.a
