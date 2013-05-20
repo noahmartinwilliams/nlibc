@@ -26,4 +26,5 @@ function testmode {
 }
 
 testmode ./tmp/a '.*-rwx------.*'
-testmode ./tmp/b '.*----r-x---.*'
+testmode ./tmp/b '.*-rw-------.*'
+testmode ./tmp/c '.*----r-x---.*'
