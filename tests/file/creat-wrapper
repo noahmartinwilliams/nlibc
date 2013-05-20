@@ -4,17 +4,26 @@ source ../../include/tmp.sh
 
 ./test-creat
 
-if [ -f './tmp/a' ];
-then
-	mode=$(ls -l ./tmp/a)	
-	echo $mode | grep '.*-rwx------.*' >>/dev/null
-	RET=$?
-	if [ "$RET" = "0" ];
+function testmode {
+	FILE=$1
+	PERM=$2
+	if [ -f "$FILE" ];
 	then
-		exit 0;
+		mode=$(ls -l $FILE)	
+		echo $mode | grep "$PERM" >>/dev/null
+		RET=$?
+		if [ "$RET" = "0" ];
+		then
+			return 0;
+		else
+			echo "$1 failed to be created or has the wrong permissions";
+			exit 1;
+		fi
 	else
+		echo "$1 failed to be created or has the wrong permissions";
 		exit 1;
 	fi
-else
-	exit 1;
-fi
+}
+
+testmode ./tmp/a '.*-rwx------.*'
+testmode ./tmp/b '.*----r-x---.*'
