@@ -18,3 +18,4 @@ test-%: %.c ../../libc.a ../../arch/asm.a
 
 clean:
 	rm -f test-*
+	if [ -d './tmp' ]; then rm -rf ./tmp; fi
