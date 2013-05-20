@@ -18,3 +18,18 @@ write:
 	movl %ebp, %esp
 	popl %ebp
 	ret
+
+.globl close
+.type close, @function
+
+close:
+	pushl %ebp
+	movl %esp, %ebp
+	.equ fd, 8
+
+	movl $6, %eax
+	movl fd(%ebp), %ebx
+	int $0x80
+	movl %ebp, %esp
+	popl %ebp
+	ret

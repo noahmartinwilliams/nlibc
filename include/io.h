@@ -3,5 +3,6 @@
 
 
 extern int write(int fd, char *buf, int count);
+extern int close(int fd);
 #endif
 
