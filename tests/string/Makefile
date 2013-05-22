@@ -3,14 +3,14 @@
 INCLUDE=../../include
 include ../../include/config.mk
 
-test: test-strcmp
+test: test-strcmp test-atoi
 	echo "string tests complete"
 
 test-%: %.c ../../libc.a ../../arch/asm.a
 	$(CMB)
 	if [ -f "./$(WRAP)-wrapper" ]; then ./$(WRAP)-wrapper; else ./$@; fi
 
-../../libc.a: 
+../../libc.a: ../../string.c
 	$(MAKE) -C ../../ libc.a
 
 ../../arch/asm.a:

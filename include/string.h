@@ -2,6 +2,7 @@
 #define __STRING_H__
 
 extern int strcmp(char *s1, char *s2);
+extern int atoi(char *str);
 
 #endif
 
