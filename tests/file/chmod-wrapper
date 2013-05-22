@@ -2,19 +2,56 @@
 
 source ../../include/tmp.sh
 
-if [ ! -f './tmp/txt' ];
-then
-	touch tmp/txt
-fi
+umask 0000
+function add_file {
+	FILE=$1
+	if [ ! -f "tmp/$FILE" ];
+	then
+		touch tmp/$FILE
+		chmod 0000 tmp/$FILE
+	else
+		chmod 0000 tmp/$FILE
+	fi
+}
 
+function check_file {
+	FILE=$1
+	MOD=$2
+
+	if [ "\"$MOD\"" != "$(stat -c \"%a\" tmp/$FILE)" ];
+	then
+		echo "permissions not changed for $(realpath ./tmp/$FILE)";
+		exit 1;
+	else 
+		return 0;
+	fi
+}
+
+add_file "txt"
+X=2
+while [ "$X" -le 512 ];
+do
+	add_file "txt$X";
+	X=$(($X + 1))
+done
 ./test-chmod
-
-ls -ld ./tmp/txt | grep '.*-rw-rw-rw-.*' >>/dev/null
-RET=$?
-
-if [ "$RET" != "0" ];
+if [ "$?" = 135 ];
 then
-	exit 1;
-else 
-	exit 0;
+	echo "assertion failed"
+	exit 1
 fi
+
+X=0776
+Y=2
+check_file "txt" '777'
+
+while [ "$Y" -le "512" ];
+do
+	check_file "txt$Y" "$(echo $X | sed 's/^0//g')"
+	Y=$(($Y + 1))
+	X=$(($X - 01))
+	#bash can handle octal numbers (so long as they start
+	#with a "0") but it returns decimal numbers, so I
+	#need to convert it back to octal and prepend the 0
+	X=$(echo "0$(echo "obase=8;$X" |bc)") 
+done
