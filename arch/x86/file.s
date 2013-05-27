@@ -103,3 +103,23 @@ read:
 	movl %ebp, %esp
 	popl %ebp
 	ret
+
+.globl open
+.type open, @function
+open:
+	pushl %ebp
+	movl %esp, %ebp
+	.equ name, 8
+	.equ flags, 12
+	.equ mode, 16
+
+	movl name(%ebp), %ebx
+	movl flags(%ebp), %ecx
+	movl mode(%ebp), %edx
+	movl $2, %eax
+	int $0x80
+
+	movl %ebp, %esp
+	popl %ebp
+	ret
+

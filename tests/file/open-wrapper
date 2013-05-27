@@ -1,0 +1,15 @@
+#! /bin/bash
+
+touch tmp/xyzzy
+./test-open&
+
+PID=$(pidof ./test-open)
+POINT=$(readlink /proc/$PID/fd/3)
+if [ "$POINT" = "$(realpath tmp/xyzzy)" ];
+then
+	kill $PID
+	exit 0;
+else
+	kill $PID
+	exit 1;
+fi
