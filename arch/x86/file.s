@@ -116,7 +116,7 @@ open:
 	movl name(%ebp), %ebx
 	movl flags(%ebp), %ecx
 	movl mode(%ebp), %edx
-	movl $2, %eax
+	movl $5, %eax
 	int $0x80
 
 	movl %ebp, %esp

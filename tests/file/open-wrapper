@@ -3,7 +3,7 @@
 touch tmp/xyzzy
 ./test-open&
 
-PID=$(pidof ./test-open)
+PID=$(pidof test-open)
 POINT=$(readlink /proc/$PID/fd/3)
 if [ "$POINT" = "$(realpath tmp/xyzzy)" ];
 then
