@@ -8,6 +8,6 @@ extern int creat(const char* name, int mode);
 extern mode_t umask(mode_t newmask);
 extern int chmod(char *name, mode_t mode);
 extern int read(int fd, char *buf, size_t count);
-extern int open(char *name, int flags, mode_t mode);
+extern int open(const char* name, int flags, mode_t mode);
 #endif
 
