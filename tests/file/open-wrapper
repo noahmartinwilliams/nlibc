@@ -2,6 +2,7 @@
 
 touch tmp/xyzzy
 touch tmp/xyzzy3
+mkdir tmp/xyzzy4
 chmod 0300 tmp/xyzzy3
 ./test-open&
 
