@@ -1,6 +1,8 @@
 #! /bin/bash
 
 touch tmp/xyzzy
+touch tmp/xyzzy3
+chmod 0300 tmp/xyzzy3
 ./test-open&
 
 PID=$(pidof test-open)

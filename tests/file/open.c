@@ -6,7 +6,9 @@ int main()
 {
 	int fd=open("./tmp/xyzzy",  O_RDONLY, 00);
 	int fd2=open("./tmp/xyzzy2", O_RDONLY, 00);
+	int fd3=open("./tmp/xyzzy3", O_RDONLY, 00);
 	assert(fd2==-ENOENT);
+	assert(fd3==-EACCES);
 	while (1) {}
 	return 0;
 }
