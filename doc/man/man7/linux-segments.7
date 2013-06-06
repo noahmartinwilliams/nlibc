@@ -1,0 +1,96 @@
+.TH Linux memory layout 7 "June 2013" nlibc
+.SH NAME
+Linux memory layout \- a brief overview of a Linux program in memory.
+.SH SYNOPSIS
+	Not a lot of people know how a computer truly works underneath all those layers of abstraction. 
+one would be surprised by how many programmers don't even know the basics of how it works. This 
+man page goes over the anatomy of a linux program.
+
+.SH TURING MACHINES
+	Before I tell you the anatomy of a Linux program, I'm going to tell you very briefly how a computer really works.
+A computer is an electrical "Turing machine." A Turing machine is a device first thought of by Alex Turing that
+has a long strand of tape and a read/write head that reads numbers and writes numbers to/from the tape.
+The idea is that on this tape there are some numbers that are interpreted as instructions by the read/write head,
+and there are some numbers that act as data for it to manipulate. 
+
+	Modern day computers still use this
+design except they have replaced tape with RAM and the read/write head with a CPU.
+Also each "number" has it's own "address" which is just a binary integer that tells where a certain "number" is in memory.
+Different architectures have different sizes in bits for these "addresses" as well as the numbers they point to.
+On the X86 family of architectures the address is 4 bytes long, and the numbers they point to are 1 byte long with an additional bit that
+tells if the number is negative or positive.
+
+	It is also important to note that any modern day CPU architecture has what are called "registers."
+A register is simply a variable that is kept in the CPU rather than memory. Each register has a certain number of bits that it takes up.
+Some registers have special jobs like keeping track of what instruction the CPU is on in the program, while others are simply there for use
+by the program. Registers are always faster than variables in memory due to them being on the CPU itself, however there are far less registers
+than there are addresses.
+
+
+.SH TERMS TO KNOW
+.B VIRTUAL ADDRESSES
+	The Linux kernel, like any modern kernel, allows multiple programs to run at once.
+A program on x86 Linux uses what is called a "virtual address space" meaning that when the program tries to 
+access some number in itself by some address. This address is translated by the CPU (or by the kernel) into some other address.
+The program never gets to find out that number's real address, nor does it get to access any real addresses.
+
+.B SEGMENTS
+	It is also important to know that many architectures support "segments."
+A segment is simply a region of memory that serves some special purpose. Different segments may have
+different "permissions" which prevent that program from accessing certain regions of memory that it shouldn't be 
+allowed to access.
+
+.B THE STACK
+	A stack in computer programming is like a stack in real life. 
+Things can be placed on top of it (called "pushing") or removed from the top of it (called "popping").
+Also like a stack, one generally can not remove something from the middle/bottom of the stack.
+
+.SH THE ANATOMY
+
+.B THE TEXT SEGEMENT
+	The first segment starts at virtual address 0x08048000. This is called the "text segment." Don't let the
+name fool you, there is no text here, only instructions. In this area the instructions that
+make up the program are stored. On the X86 architecture the CPU keeps track of which instruction a program is on
+through the Instruction Pointer register, or IP register. When an instruction is carried out, this register is incremented.
+
+.B THE DATA SEGMENT
+	The next segment is the Data segment, it contains global variables that start out at some specific value.
+Whenever you write a constant string for use by the program in C, that string is held at some address in the Data segment, and
+that address is what is passed around from function to function. Not the actual string itself.
+
+.B THE BSS SEGMENT
+	The next segment is the BSS segment. The BSS segment is like the DATA segment, except the variables it keeps are uninitialized,
+meaning that the programer did not feel the need to set their value at their declaration.
+After this segment is a random amount of empty space where nothing important is stored.
+
+.B THE HEAP SEGMENT
+	After that random amount of space comes the HEAP segment.
+The heap segment is used for dynamically allocated data (basically anything you would use malloc to get).
+As more memory is allocated from the heap segment, the size of it grows, and the last address of the segment increases.
+After the heap segment is a random amount of empty space.
+
+.B THE MMAP SEGMENT
+	After that empty space comes the mmap segment. This segment is where the memory is allocated every time you 
+use the mmap(2) system call. It can also be used for the malloc/calloc/realloc functions. The mmap segment grows downwards
+toward the heap segment as more of it is used.
+
+.B THE STACK SEGMENT
+	The stack segment is 
+one big stack that the program uses for things like local variables and temporary data;
+however unlike most programming stacks the data in this stack can be accessed from the middle/end.
+Also this stack grows downwards towards the mmap segment. 
+
+	Another important feature of this stack is that there is a register called the "extended stack pointer" (or "esp")
+that points to the top of the stack (at the beginning of it's segment). This pointer is decremented when 
+the stack has something pushed onto it, and incremented when something is popped off. 
+After the stack segment comes a random amount of space.
+
+.B THE KERNEL SPACE
+After that random space is what is called "The kernel space." Programs cannot read or write to the
+kernel space, and this space is in fact the memory used by the kernel.
+
+.SH CITATION
+The information presented here was gathered from the following address: 
+.B http://duartes.org/gustavo/blog/post/anatomy-of-a-program-in-memory
+and from the pdf book 
+.B "Programming From The Ground Up by Jonathan Bartlett"
