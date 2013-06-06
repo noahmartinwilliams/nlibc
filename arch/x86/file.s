@@ -123,3 +123,19 @@ open:
 	popl %ebp
 	ret
 
+.globl getcwd
+.type getcwd, @function
+getcwd:
+	pushl %ebp
+	movl %esp, %ebp
+	.equ buf, 8
+	.equ size, 12
+	
+	movl buf(%ebp), %ebx
+	movl size(%ebp), %ecx
+	movl $183, %eax
+	int $0x80
+
+	movl %ebp, %esp
+	popl %ebp
+	ret
