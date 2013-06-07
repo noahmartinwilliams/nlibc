@@ -4,7 +4,7 @@ INCLUDE=./include
 include ./include/config.mk
 
 
-tests: test-file test-string test-proc  test-assert
+tests: test-file test-string test-proc  test-assert test-memory
 	echo "tests complete"
 
 libc.so: libc.a arch/asm.a
@@ -22,8 +22,11 @@ test-string:
 test-proc:
 	$(MAKE) -C tests/proc/ test
 
+test-memory:
+	$(MAKE) -C tests/memory/ test
 
-libc.a: string.o file2.o assert.o errno.o
+
+libc.a: string.o file2.o assert.o errno.o 
 	$(AR)
 
 arch/asm.a:
@@ -39,6 +42,7 @@ clean:
 	$(MAKE) -C tests/file clean
 	$(MAKE) -C tests/string clean
 	$(MAKE) -C tests/proc clean
+	$(MAKE) -C tests/memory clean
 	rm -f *.o
 	rm -f *.so
 	rm -f test-*

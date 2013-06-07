@@ -3,5 +3,6 @@
 
 typedef unsigned int size_t;
 typedef unsigned int mode_t;
+typedef unsigned int off_t;
 
 #endif

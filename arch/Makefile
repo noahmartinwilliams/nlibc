@@ -4,7 +4,7 @@ INCLUDE=../include/
 include ../include/config.mk
 
 
-asm.a: loader.o file.o proc.o
+asm.a: loader.o file.o proc.o memory.o
 	$(AR)
 
 %.o: $(ARC)/%.s

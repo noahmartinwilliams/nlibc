@@ -1,0 +1,11 @@
+#! /bin/bash
+
+source ../../include/tmp.sh
+
+if [ ! -f 'tmp/mmap2.txt' ];
+then
+	touch tmp/mmap2.txt
+	echo -n "hello " >>tmp/mmap2.txt
+fi
+
+./test-mmap2
