@@ -1,0 +1,42 @@
+#! /bin/bash
+
+source ../../include/tmp.sh
+function mod2oct {
+	echo "$1" | sed -e 's/r/4+/g' \
+	-e 's/w/2+/g' \
+	-e 's/x/1+/g' \
+	-e 's/-/0+/g' \
+	-e 's/\(.*\).$/\1/g' | bc 
+}
+
+function memmap {
+	pmap $1 | sed \
+	-e 's/[[:space:]]\+/ /g' \
+	-e '1d' \
+	-e '$d' \
+	-e 's/\[[[:space:]]\+\([a-z]\+\)[[:space:]]\+\]/[\1]/g' 
+}
+
+
+if [ -f "tmp/mmap2-anon.txt" ];
+then
+	truncate --size 0 tmp/mmap2-anon.txt
+else
+	touch tmp/mmap2-anon.txt
+fi
+
+trap "truncate --size 0 tmp/mmap2-anon.txt; killall -g test-mmap2-anon" SIGTERM
+(tail --pid $(pidof test-mmap2-anon) -f tmp/mmap2-anon.txt | ./test-mmap2-anon)&
+
+memmap $(pidof test-mmap2-anon) | cut -f 2,3,4 -d ' ' >tmp/mmap2-anona
+echo -n "a" >>tmp/mmap2-anon.txt
+memmap $(pidof test-mmap2-anon) | cut -f 2,3,4 -d ' ' >tmp/mmap2-anonb
+echo -n "a" >>tmp/mmap2-anon.txt
+
+truncate --size 0 tmp/mmap2-anon.txt
+if [ "$(diff tmp/mmap2-anon{a,b})" = "$(echo -ne '2a3\n> 4K ----- [anon]\n')" ];
+then
+	exit 0;
+else
+	exit 1;
+fi

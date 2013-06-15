@@ -3,7 +3,7 @@
 INCLUDE=../../include
 include ../../include/config.mk
 
-test: test-mmap2
+test: test-mmap2 test-mmap2-anon
 	echo "memory tests complete"
 
 test-%: %.c ../../libc.a ../../arch/asm.a

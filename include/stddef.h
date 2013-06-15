@@ -134,5 +134,6 @@
 #define O_CREAT 64
 #define MAP_PRIVATE 2
 #define MAP_SHARED 1
+#define MAP_ANONYMOUS 32
 
 #endif
