@@ -1,14 +1,21 @@
 #! /bin/bash
 
 source ../../include/tmp.sh
-if [ ! -f tmp/chdir.txt ];
-then
-	touch tmp/chdir.txt
-else
-	truncate --size 0 tmp/chdir.txt
-fi
 
-killall -g test-chdir
+function cleanup {
+	killall -g test-chdir 2>/dev/null
+	if [ -f tmp/chdir.txt ];
+	then
+		truncate --size 0 tmp/chdir.txt
+	else
+		touch tmp/chdir.txt
+	fi
+}
+
+cleanup
+
+trap cleanup SIGTERM SIGABRT SIGQUIT SIGKILL SIGSEGV
+
 
 (tail -f tmp/chdir.txt --pid=$(pidof test-chdir) | ./test-chdir $(mktemp -uq --tmpdir="/"))&
 
