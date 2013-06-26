@@ -1,0 +1,29 @@
+#! /bin/bash
+
+source ../../include/tmp.sh
+if [ ! -f tmp/chdir.txt ];
+then
+	touch tmp/chdir.txt
+else
+	truncate --size 0 tmp/chdir.txt
+fi
+
+(tail -f tmp/chdir.txt --pid=$(pidof test-chdir) | ./test-chdir)&
+
+if [ "$(readlink /proc/$(pidof test-chdir)/cwd)"  = $(pwd) ];
+then
+	echo -n "a" >>tmp/chdir.txt
+	if [ "$(readlink /proc/$(pidof test-chdir)/cwd)" = $(dirname $(pwd)) ];
+	then
+		exit 0;
+	else
+		killall test-chdir
+		echo "changed directory for test-chdir not correct";
+		exit 1;
+	fi
+else
+	killall test-chdir
+	echo "Starting directory for test-chdir not correct"
+	exit 1;
+fi
+

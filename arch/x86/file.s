@@ -139,3 +139,17 @@ getcwd:
 	movl %ebp, %esp
 	popl %ebp
 	ret
+
+.globl chdir
+.type chdir, @function
+chdir:
+	pushl %ebp
+	movl %esp, %ebp
+	.equ path, 8
+	movl path(%ebp), %ebx
+	movl $12, %eax
+	int $0x80
+
+	movl %ebp, %esp
+	popl %ebp
+	ret

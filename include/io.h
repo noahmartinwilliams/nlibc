@@ -10,5 +10,5 @@ extern int chmod(char *name, mode_t mode);
 extern int read(int fd, char *buf, size_t count);
 extern int open(const char* name, int flags, mode_t mode);
 extern int getcwd(char *buf, size_t size);
+extern int chdir(const char *path);
 #endif
-
