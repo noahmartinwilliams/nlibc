@@ -5,6 +5,7 @@
 int main(int argc, char *argv[])
 {
 	char buf[50];
+	assert(chdir("./tmp/chdir-badperm")==-EACCES);
 	read(0, &buf, 1);
 	assert(chdir("..")==0);
 	read(0, &buf, 1);

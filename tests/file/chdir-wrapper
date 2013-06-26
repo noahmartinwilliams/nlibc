@@ -10,6 +10,15 @@ function cleanup {
 	else
 		touch tmp/chdir.txt
 	fi
+
+	if [ -d tmp/chdir-badperm ];
+	then
+		chmod 600 tmp/chdir-badperm
+	else
+		mkdir tmp/chdir-badperm
+		chmod 600 tmp/chdir-badperm
+	fi
+	
 }
 
 cleanup
