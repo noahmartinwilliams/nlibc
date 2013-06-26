@@ -1,0 +1,103 @@
+.TH MAKEFILES 1 "JUNE 18" NLIBC
+.SH NAME
+Makefiles \- what are they? and how do they work?
+
+.SH DESCRIPTION
+.SS THE PROBLEM
+.P
+Many new programmers are unaware of how slow compilers can be. 
+Most of the time these programmers are only writing simple hello world programs, and 
+never write anything large enough to create a noticeable delay; however for Large projects
+like kernels, and web browsers the compiler can\'t compile the entire thing quickly enough.
+
+.SS HOW DO MAKEFILES SOLVE THIS?
+.P
+Makefiles work off of the idea that you don\'t need to recompile a line
+of code that hasn\'t changed since the last compilation. 
+.P
+To accomplish this
+those bearded geniuses back at Bell labs modified their programming language to
+allow them to compile files that don\'t have a main function into what is called an "object file";
+which is simply a file full of pre-compiled functions that can be combined with other object files until you get a complete program.
+
+.P
+These object files are combined by what is known as a "dynamic linker". This way they didn\'t need to recompile the whole program just
+to try out a new change in it. They only needed to recompile a file containing the function they modified. Soon enough they decided to automate
+this process.
+
+.P
+A simple Makefile looks like this:
+
+CC=gcc
+
+main.o: main.c
+.RS
+	$(CC)
+.RE
+
+
+
+
+.P
+The part at the beginning "CC=gcc" is called a macro. This macro works much like a C macro except we need to put $() around it in order to use it.
+The "main.o" part is what\'s called the "target"; when we type in "make main.o" the make program will look for a file called either
+"Makefile" or "makefile" in the current directory. After that it will look for the line that begins with "main.o". main.o is the file 
+we are going to create, and it will be created from main.c 
+.P
+If the make command detects that main.c was modified more recently
+than main.o or that main.o does not exist, then the "rules" will be executed. The "rules" are simply the indented lines underneath
+all this that act as the commands that will be executed.
+
+.P Also a target can rely on another target.
+For instance we could append the following to the above example:
+
+main.c: main.b
+.RS
+	cat main.b |sed '5d' >main.c
+.RE
+
+This would cause the makefile to first check to see if main.c is newer than main.b.
+If main.c is not newer, or does not exist, it runs the rules for main.c and then
+the rules for main.o.
+
+.SH HOW C DOES EXTERNAL FUNCTIONS
+Obviously if you want to keep a function seperate from the rest of the program until linking, then it 
+doesn't make much sense to have all your functions being defined all in one compilation; however the C programming
+language doesn't like you using functions that you never declared. 
+
+.P
+So how does the C language handle this?
+Meet the keyword "extern". If I want to have the function "foo" kept in "foo.c" and seperate from "main.c" I would simply put:
+"extern int foo(int a, int b);" in "main.c" or a file that main.c #includes.  In this case I am declaring foo
+as a function that returns an int and takes two integer arguments. 
+
+.P
+It's important that you get the extern line right as there is no
+way for the C programming language to make sure that foo really does return an int and take two integer arguments.
+The extern keyword also works on global variables too. For example: "extern int bar;" tells the compiler there is
+an external integer variable called bar.
+
+.P 
+Now the tradition is to keep all those externs in what's called a "header file" (those files that have the .h extension). 
+Also some another important keyword: "static" which makes a function/variable that is declared stay hidden to anything else
+this compiled file is linked to. For example:
+"static int foo;" declares a variable "foo" that is an integer and can't be seen by other files it's linked to. Static can also be used 
+on functions by simply putting it in front of the return type of the function.
+
+.SH OTHER MAKEFILE FEATURES
+Some other important makefile features include:
+.SS WILDCARDS
+%.o: %.c
+.RS
+	$(CC)
+.RE
+will interpret the '%' as a wildcard that could be anything. So if the makefile needs a file called "foo.o" it will know to look for "foo.c" and
+run the rules '$(CC)'.
+.SS INCLUDES
+include ../config.mk
+
+will include all the contents of the file '../config.mk' into the current makefile.
+.SS CLEAN TARGETS
+It isn't so much a feature, but rather a tradition to make a target called "clean" that removes all those .o files.
+.SH SEE ALSO
+The GNU explanation of makefiles https://www.gnu.org/software/make/manual/make.html
