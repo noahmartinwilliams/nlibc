@@ -15,7 +15,16 @@ then
 	echo -n "a" >>tmp/chdir.txt
 	if [ "$(readlink /proc/$(pidof test-chdir)/cwd)" = $(dirname $(pwd)) ];
 	then
-		exit 0;
+		echo -n "a" >>tmp/chdir.txt
+		if [ "$(readlink /proc/$(pidof test-chdir)/cwd)" = "/" ];
+		then
+			killall test-chdir
+			exit 0;
+		else
+			killall test-chdir
+			echo "test-chdir unable to change to root directory";
+			exit 1;
+		fi
 	else
 		killall test-chdir
 		echo "changed directory for test-chdir not correct";
