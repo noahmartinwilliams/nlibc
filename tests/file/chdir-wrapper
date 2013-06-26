@@ -8,6 +8,8 @@ else
 	truncate --size 0 tmp/chdir.txt
 fi
 
+killall -g test-chdir
+
 (tail -f tmp/chdir.txt --pid=$(pidof test-chdir) | ./test-chdir $(mktemp -uq --tmpdir="/"))&
 
 if [ "$(readlink /proc/$(pidof test-chdir)/cwd)"  = $(pwd) ];
