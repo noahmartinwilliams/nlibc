@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
 
 	char buf[100];
 	buf[100]='\0';
-	getcwd(&buf, 100);
+	getcwd((char*) &buf, 100);
 
-	assert(!strcmp(argv[1], &buf));
+	assert(!strcmp(argv[1], (char*) &buf));
 	return 0;
 }
