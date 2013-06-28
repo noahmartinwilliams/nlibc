@@ -8,7 +8,7 @@ test: test-strcmp test-atoi
 
 test-%: %.c ../../libc.a ../../arch/asm.a
 	$(CMB)
-	if [ -f "./$(WRAP)-wrapper" ]; then ./$(WRAP)-wrapper; else ./$@; fi
+	MSG=$(RUNWRAP); $(PRINTPRETTY)
 
 ../../libc.a: ../../string.c
 	$(MAKE) -C ../../ libc.a

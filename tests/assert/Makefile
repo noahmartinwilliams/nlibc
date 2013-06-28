@@ -8,7 +8,7 @@ test: test-assert_fail test-assert_succeed
 
 test-%: %.c ../../libc.a ../../arch/asm.a
 	$(CMB)
-	if [ -f "$(WRAP)-wrapper" ];then ./$(WRAP)-wrapper; else ./$@; fi
+	MSG=$(RUNWRAP); $(PRINTPRETTY)
 
 ../../libc.a: 
 	$(MAKE) -C ../../ libc.a

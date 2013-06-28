@@ -8,7 +8,7 @@ test: test-write test-low_print test-close test-creat test-umask-read test-chmod
 
 test-%: %.c ../../libc.a ../../arch/asm.a
 	$(CMB)
-	if [ -f "./$(WRAP)-wrapper" ]; then ./$(WRAP)-wrapper; else ./$@; fi
+	MSG=$(RUNWRAP); $(PRINTPRETTY)
 
 ../../libc.a: 
 	$(MAKE) -C ../../ libc.a

@@ -9,3 +9,5 @@ AS=as $^ -o $@
 AR=ar rc $@ $^
 SHARE=ld -nostdlib -share $^ -o $@
 WRAP=$$(echo "$@" | sed 's/test-//g')
+RUNWRAP=$$(if [ -f "./$(WRAP)-wrapper" ]; then ./$(WRAP)-wrapper; else ./$@; fi)
+PRINTPRETTY=if [ "$$?" = "0" ]; then tput sgr0; echo -n "$@ [ "; tput bold; tput setaf 2; echo -n "passed"; tput sgr0; echo " ] $$MSG"; else tput sgr0; echo -n "$@ [ "; tput bold; tput setaf 1; echo -n "failed"; tput sgr0; echo " ] $$MSG"; fi

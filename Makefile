@@ -11,19 +11,19 @@ libc.so: libc.a arch/asm.a
 	$(SHARE)
 
 test-file: 
-	$(MAKE) -C tests/file/ test
+	$(MAKE) -is -C tests/file/ test
 
 test-assert:
-	$(MAKE) -C tests/assert/ test
+	$(MAKE) -is -C tests/assert/ test
 
 test-string: 
-	$(MAKE) -C tests/string/ test
+	$(MAKE) -is -C tests/string/ test
 
 test-proc:
-	$(MAKE) -C tests/proc/ test
+	$(MAKE) -is -C tests/proc/ test
 
 test-memory:
-	$(MAKE) -C tests/memory/ test
+	$(MAKE) -is -C tests/memory/ test
 
 
 libc.a: string.o file2.o assert.o errno.o 

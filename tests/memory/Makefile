@@ -8,7 +8,7 @@ test: test-mmap2 test-mmap2-anon
 
 test-%: %.c ../../libc.a ../../arch/asm.a
 	$(CMB)
-	if [ -f "./$(WRAP)-wrapper" ]; then ./$(WRAP)-wrapper; else ./$@; fi
+	MSG=$(RUNWRAP); $(PRINTPRETTY)
 
 ../../libc.a:
 	$(MAKE) -C ../../ libc.a
