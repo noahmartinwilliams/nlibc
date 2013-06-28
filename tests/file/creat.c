@@ -27,8 +27,7 @@ int main()
 	int fd21=creat("./tmp/u", 0002);
 	int fd22=creat("./tmp/v", 0001);
 	int fd23=creat("./tmp/z/a", 0777);
-	assert(fd23==-1);
-	assert(errno==ENOTDIR);
+	assert(fd23==-20);
 	close(fd1);
 	close(fd2);
 	close(fd3);

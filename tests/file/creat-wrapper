@@ -3,7 +3,17 @@
 source ../../include/tmp.sh
 
 umask 0000
+if [ ! -f "tmp/z" ];
+then
+	touch tmp/z
+fi
+
 MSG=$(./test-creat)
+
+if [ "$?" != "0" ];
+then
+	exit 1;
+fi
 echo "$MSG"
 
 function testmode {
