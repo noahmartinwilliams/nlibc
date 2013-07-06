@@ -1,0 +1,11 @@
+#! /bin/bash
+
+source ../../include/tmp.sh
+
+if [ ! -p ./tmp/read-eagain.txt ];
+then
+	mkfifo ./tmp/read-eagain.txt
+fi
+
+(cat >>./tmp/read-eagain.txt)&
+./test-read-eagain

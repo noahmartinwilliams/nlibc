@@ -135,5 +135,7 @@
 #define MAP_PRIVATE 2
 #define MAP_SHARED 1
 #define MAP_ANONYMOUS 32
+#define O_NONBLOCK 2048
+
 
 #endif
