@@ -1,0 +1,7 @@
+*.a
+*.o
+*.so
+tests/*/test-*
+!tests/*/test-*-wrapper
+tests/*/tmp/*
+tests/*/tmp
