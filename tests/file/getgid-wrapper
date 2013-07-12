@@ -1,0 +1,5 @@
+#! /bin/bash
+
+GID=$(id | cut -f 2 -d ' ' | sed 's/^gid=\([0-9]\+\).*/\1/g')
+
+./test-getgid $GID
