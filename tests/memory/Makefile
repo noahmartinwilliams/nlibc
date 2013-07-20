@@ -6,9 +6,12 @@ include ../../include/config.mk
 test: test-mmap2 test-mmap2-anon
 	echo "memory tests complete"
 
-test-%: %.c ../../libc.a ../../arch/asm.a
+test-%: %.c ../../libc.a ../../arch/asm.a ../../include/stddef.h
 	$(CMB)
 	MSG=$(RUNWRAP); $(PRINTPRETTY)
+
+../../include/stddef.h: ../../errors
+	$(MAKE) -C ../../ include/stddef.h
 
 ../../libc.a:
 	$(MAKE) -C ../../ libc.a
