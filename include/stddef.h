@@ -1,14 +1,7 @@
 #ifndef __STDDEF_H__
 #define __STDDEF_H__
-
 #define max(a,b) ((a>b)?a:b)
 #define __STRING(x) #x
-
-#define PROT_READ 1
-#define PROT_WRITE 2
-#define PROT_EXEC 4
-#define PROT_NONE 0
-#define NULL 0
 #define E2BIG 7
 #define EACCES 13
 #define EADDRINUSE 98
@@ -131,11 +124,16 @@
 #define O_APPEND 1024
 #define O_WRONLY 1
 #define O_RDONLY 0
+#define SIG_BLOCK 0
+#define SIG_UNBLOCK 1
+#define SIG_SETMASK 2
+#define PROT_READ 1
+#define PROT_WRITE 2
+#define PROT_EXEC 4
+#define PROT_NONE 0
 #define O_CREAT 64
 #define MAP_PRIVATE 2
 #define MAP_SHARED 1
 #define MAP_ANONYMOUS 32
 #define O_NONBLOCK 2048
-
-
 #endif

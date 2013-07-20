@@ -1,0 +1,40 @@
+#! /bin/bash
+
+if [ -z "$1" ];
+then
+	echo "usage $0 file" >&2;
+	exit 1;
+fi
+C_FILE=$(mktemp -u)
+C_FILE="$C_FILE.c"
+
+trap "rm -f $C_FILE" EXIT
+
+cat >$C_FILE <<-_EOF_
+#include <stdio.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <sys/mman.h>
+
+int main() {
+printf("#ifndef __STDDEF_H__\\n");
+printf("#define __STDDEF_H__\\n");
+printf("#define max(a,b) ((a>b)?a:b)\\n");
+printf("#define __STRING(x) #x\\n");
+
+_EOF_
+
+cat $1 | sed 's/^\(.*\)$/printf("#define \1 %d\\n", (int) \1);/g' >>$C_FILE
+
+echo "printf(\"#endif\\n\");return 0;}" >>$C_FILE
+
+E_FILE=$(mktemp -u)
+
+gcc $C_FILE -o $E_FILE
+
+trap "rm -f $E_FILE" EXIT
+
+$E_FILE

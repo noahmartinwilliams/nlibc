@@ -36,6 +36,9 @@ arch/asm.a:
 	$(CMP)
 	
 
+update:
+	./bin/update-stddef errors >include/stddef.h
+
 clean:
 	$(MAKE) -C arch/ clean
 	$(MAKE) -C tests/assert clean
