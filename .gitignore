@@ -5,3 +5,4 @@ tests/*/test-*
 !tests/*/test-*-wrapper
 tests/*/tmp/*
 tests/*/tmp
+include/stddef.h

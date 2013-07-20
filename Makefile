@@ -32,11 +32,11 @@ libc.a: string.o file2.o assert.o errno.o
 arch/asm.a:
 	$(MAKE) -C arch/ asm.a
 
-%.o: %.c
+%.o: %.c include/stddef.h
 	$(CMP)
 	
 
-update:
+include/stddef.h: ./errors
 	./bin/update-stddef errors >include/stddef.h
 
 clean:
