@@ -9,6 +9,7 @@ int main()
 	int fd3=open("./tmp/xyzzy3", O_RDONLY, 00);
 	int fd4=open("./tmp/xyzzy4", O_WRONLY, 00);
 	int fd5=open("./tmp/xyzzy3", O_DIRECTORY, 00);
+	int fd6=open("./tmp/xyzzy5", O_CREAT|O_RDONLY, 00);
 	assert(fd2==-ENOENT);
 	assert(fd3==-EACCES);
 	assert(fd4==-EISDIR);

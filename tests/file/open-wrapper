@@ -6,8 +6,15 @@ mkdir tmp/xyzzy4
 chmod 0300 tmp/xyzzy3
 ./test-open&
 
+
 PID=$(pidof test-open)
 POINT=$(readlink /proc/$PID/fd/3)
+if [ ! -f "./tmp/xyzzy5" ];
+then
+	kill $PID
+	exit 1;
+fi
+
 if [ "$POINT" = "$(realpath tmp/xyzzy)" ];
 then
 	kill $PID
