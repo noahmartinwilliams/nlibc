@@ -1,0 +1,13 @@
+#! /bin/bash
+
+touch tmp/o_append
+echo -n "hello" >>tmp/o_append
+
+./test-o_append
+
+if [ "$(wc -l ./tmp/o_append | cut -f 1 -d ' ')" = 2 ];
+then
+	exit 0;
+else
+	exit 1;
+fi
