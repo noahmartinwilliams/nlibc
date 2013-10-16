@@ -1,0 +1,15 @@
+#! /bin/bash
+
+./test-sbrk2 &
+
+cat "/proc/$(pidof test-sbrk2)/maps" | grep '\[heap\]' 
+RET=$?
+if [ "$RET" != "1" ];
+then
+	kill $(pidof test-sbrk2)
+	exit 1;
+else
+	kill $(pidof test-sbrk2)
+	exit 0;
+fi
+

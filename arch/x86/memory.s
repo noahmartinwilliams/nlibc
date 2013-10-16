@@ -24,3 +24,17 @@ mmap2:
 
 	popl %ebp
 	ret
+
+.globl sbrk2
+.type sbrk2, @function
+sbrk2:
+	pushl %ebp
+	movl %esp, %ebp
+	.equ addr, 8
+
+	movl addr(%ebp), %ebx
+	movl $45, %eax
+	int $0x80
+
+	popl %ebp
+	ret
