@@ -14,17 +14,28 @@ int strcmp(char *s1, char *s2) {
 
 int atoi(char *str) 
 {
-	int x;
+	int x=0;
 	int number=0;
 	int base=10;
 	int digit=0;
 	int neg=1;
 
-	for (x=0; str[x]!='\0'; x++) {
+	if (str[x]=='-') {
+		neg=-1;
+		x++;
+	} 
+
+	if ((str[x]=='0' && str[x+1]=='x') || str[x]=='h'){
+		base=16;
+		x++;
+	} else if (str[x]=='b') {
+		base=2;
+		x++;
+	}
+		
+
+	for (; str[x]!='\0'; x++) {
 		switch(str[x]) {
-			case '-':
-				neg=-1;
-				break;
 			case '0':
 				digit=0;
 				break;
@@ -62,6 +73,54 @@ int atoi(char *str)
 
 			case '9':
 				digit=9;
+				break;
+
+			case 'A':
+				digit=10;
+				break;
+
+			case 'a':
+				digit=10;
+				break;
+
+			case 'B':
+				digit=11;
+				break;
+
+			case 'b':
+				digit=11;
+				break;
+
+			case 'C':
+				digit=12;
+				break;
+
+			case 'c':
+				digit=12;
+				break;
+
+			case 'D':
+				digit=13;
+				break;
+
+			case 'd':
+				digit=13;
+				break;
+
+			case 'E':
+				digit=14;
+				break;
+
+			case 'e':
+				digit=14;
+				break;
+
+			case 'F':
+				digit=15;
+				break;
+
+			case 'f':
+				digit=15;
 				break;
 
 			case '\0':
