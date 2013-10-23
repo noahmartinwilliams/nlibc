@@ -136,4 +136,8 @@
 #define MAP_SHARED 1
 #define MAP_ANONYMOUS 32
 #define O_NONBLOCK 2048
+#define NULL 0
+#define O_DIRECTORY 65536
+#define O_EXCL 128
+#define O_TRUNC 512
 #endif
