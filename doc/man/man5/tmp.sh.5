@@ -1,0 +1,25 @@
+.TH tmp.sh 5 "November 2013"  nlibc
+
+.SH DESCRIPTION
+The tmp.sh script in the include directory offers functions for creating
+temporary files for testing. 
+
+.SH WHEN SOURCED
+When the tmp.sh file is sourced it automatically creates a 'tmp' directory 
+in the current directory if one does not already exist. 
+
+.SH FUNCTIONS
+.B newfile
+.I name
+
+The newfile function creates a new temporary file in the tmp directory. If a
+file of the name given already exists then it truncates the file.
+The name argument must not start with 'tmp/' or './tmp/' or the absolute path
+of the file.
+
+.B newdir
+.I name
+
+The newdir command creates a new directory in the tmp directory from the first
+argument given.
+The name given must not start with './tmp' or 'tmp/' or be an absolute path.
