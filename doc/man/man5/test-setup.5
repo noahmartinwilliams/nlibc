@@ -1,0 +1,21 @@
+.TH TEST-SETUP 5 "November 2013" nlibc
+.SH DESCRIPTION
+
+The testing system in use in nlibc is a custom made one since I couldn't find
+one that was built for creating standard c libraries.
+
+.SH DIRECTORIES
+As of now there is a 'test' directory at the top level of the project that
+contains a directory for every category of functions (called 'test directories'). Inside each of these
+directories there may also be a 'tmp' directory for holding temporary files 
+used by the tests.
+
+.SH FILES
+In each test directory there is a makefile which has a 'test' target which
+runs all the tests. In order to add a new test, this target must have
+the test name added to it's dependencies. Each dependency is of the format:
+'test-<testname>'. There is also a c file for each test. These
+files will be compiled into a program of the name 'test-<original name>'.
+If there is a file called '<testname>-wrapper' then that will be run
+rather than the test itself and whether or not the test was a success will
+depend on the return type (zero indicates success).
