@@ -25,13 +25,3 @@ function newfile {
 		truncate --size 0 tmp/$(basename $FILE)
 	fi
 }
-
-function newfile {
-	FILE=$1
-	if [ ! -f "tmp/$(basneame $FILE)" ];
-	then
-		touch tmp/$(basename $FILE)
-	else
-		truncate --size 0 tmp/$(basename $FILE)
-	fi
-}
