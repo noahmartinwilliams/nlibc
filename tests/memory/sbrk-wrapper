@@ -1,0 +1,32 @@
+#! /bin/bash
+
+source ../../include/tmp.sh
+
+newfile sbrk.txt
+
+(tail -f --pid=$(pidof test-sbrk) tmp/sbrk.txt | ./test-sbrk)&
+
+cat /proc/$(pidof test-sbrk)/maps | grep '\[heap\]'
+RET=$?
+
+if [ "$RET" = "0" ];
+then
+	echo "heap already exists"
+	killall test-sbrk
+	exit 1;
+else
+	echo "a">>tmp/sbrk.txt
+
+	cat /proc/$(pidof test-sbrk)/maps | grep '\[heap\]'
+	RET=$?
+
+	if [ "$RET" = "0" ];
+	then
+		echo "a">>tmp/sbrk.txt
+		exit 0;
+	else
+		echo "a">>tmp/sbrk.txt
+		echo "heap not created"
+		exit 1;
+	fi
+fi

@@ -26,7 +26,7 @@ test-memory:
 	$(MAKE) -is -C tests/memory/ test
 
 
-libc.a: string.o file2.o assert.o errno.o 
+libc.a: string.o file2.o assert.o errno.o memory.o
 	$(AR)
 
 arch/asm.a:
