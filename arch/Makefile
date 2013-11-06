@@ -2,6 +2,7 @@
 
 INCLUDE=../include/
 include ../include/config.mk
+ASMINCLUDE=$(realpath ./$(ARC)/include)
 
 
 asm.a: loader.o file.o proc.o memory.o
