@@ -7,6 +7,9 @@ test: test-assert_fail test-assert_succeed
 	echo "assert tests complete"
 
 test-%: %.c ../../libc.a ../../arch/asm.a ../../include/stddef.h
+	$(MAKE) -C ../../ include/stddef.h
+	$(MAKE) -C ../../ libc.a
+	$(MAKE) -C ../../arch/ asm.a
 	$(CMB)
 	MSG=$(RUNWRAP); $(PRINTPRETTY)
 

@@ -7,6 +7,9 @@ test: test-write test-low_print test-close test-creat test-umask-read test-chmod
 	echo "file tests complete"
 
 test-%: %.c ../../libc.a ../../arch/asm.a ../../include/stddef.h
+	$(MAKE) -C ../../ include/stddef.h
+	$(MAKE) -C ../../ libc.a
+	$(MAKE) -C ../../arch/ asm.a
 	$(CMB)
 	MSG=$(RUNWRAP); $(PRINTPRETTY)
 
