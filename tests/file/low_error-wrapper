@@ -1,0 +1,12 @@
+#! /bin/bash
+
+ARG=$RANDOM
+RES=$(./test-low_error $ARG 2>&1 )
+
+if [ "$RES" = "$ARG" ];
+then
+	exit 0;
+else
+	echo "Message not received or not correct"
+	exit 1;
+fi
