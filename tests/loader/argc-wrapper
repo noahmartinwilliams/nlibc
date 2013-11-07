@@ -1,0 +1,15 @@
+#! /bin/bash
+
+ARGS_LINE=$(seq 0 $(($RANDOM % 255)))
+ARGS=$(echo "$ARGS_LINE" | sed 's/\n/ /g')
+./test-argc $ARGS
+NUM=$?
+
+EXPECTED=$(( $(echo "$ARGS_LINE" | wc -l) + 1))
+if [ "$NUM" = $EXPECTED ];
+then
+	exit 0;
+else
+	echo "argc gave $NUM arguments. Should have given $EXPECTED arguments"
+	exit 1;
+fi

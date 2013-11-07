@@ -4,12 +4,14 @@ INCLUDE=./include
 include ./include/config.mk
 
 
-tests: test-file test-string test-proc  test-assert test-memory
+tests: test-loader test-file test-string test-proc  test-assert test-memory
 	echo "tests complete"
 
 libc.so: libc.a arch/asm.a
 	$(SHARE)
 
+test-loader:
+	$(MAKE) -is -C tests/loader/ test
 test-file: 
 	$(MAKE) -is -C tests/file/ test
 
