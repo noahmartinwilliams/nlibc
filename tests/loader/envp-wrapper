@@ -1,0 +1,15 @@
+#! /bin/bash
+
+ARG_LINE=$(seq 0 9 | tr 0-9 a-j)
+ENV_LINE=$(echo "$ARG_LINE" | sed 's/^\(.*\)$/\1=\1/g')
+ENV=$(echo "$ENV_LINE" | sed 's/\n/ /g')
+
+env -i $ENV ./test-envp $ENV
+RET=$?
+
+if [ "$RET" = "0" ];
+then
+	exit 0;
+else
+	exit 1;
+fi

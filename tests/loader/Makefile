@@ -3,7 +3,7 @@
 INCLUDE=../../include/
 include ../../include/config.mk
 
-test: test-argc test-argv
+test: test-argc test-argv test-envp
 	echo "file tests complete"
 
 test-%: %.c ../../libc.a ../../arch/asm.a ../../include/stddef.h
