@@ -7,6 +7,9 @@ test: test-mmap2 test-mmap2-anon test-sbrk2 test-sbrk
 	echo "memory tests complete"
 
 test-%: %.c ../../libc.a ../../arch/asm.a ../../include/stddef.h
+	$(MAKE) -C ../../ include/stddef.h
+	$(MAKE) -C ../../ libc.a
+	$(MAKE) -C ../../arch/ asm.a
 	$(CMB)
 	MSG=$(RUNWRAP); $(PRINTPRETTY)
 
