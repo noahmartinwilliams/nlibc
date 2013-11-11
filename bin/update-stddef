@@ -18,6 +18,7 @@ cat >$C_FILE <<-_EOF_
 #include <fcntl.h>
 #include <signal.h>
 #include <sys/mman.h>
+#include <elf.h>
 
 int main() {
 printf("#ifndef __STDDEF_H__\\n");
