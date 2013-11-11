@@ -6,5 +6,6 @@ typedef unsigned int mode_t;
 typedef unsigned int off_t;
 typedef int gid_t;
 typedef int intptr_t;
+typedef __UINT32_TYPE__ uint32_t;
 
 #endif

@@ -18,7 +18,20 @@ _start:
 
 	continue:
 	addl $4, %edx
-	#subl $4, %edx
+
+	movl %edx, %ecx
+	pushl %edx
+	pushl %ebx
+	pushl %eax
+	addl $4, %ecx
+	pushl %ecx
+	call handle_auxv
+	movl %eax, %gs
+	popl %ecx
+	popl %eax
+	popl %ebx
+	popl %edx
+
 	pushl %edx
 	pushl %ebx
 	pushl %eax
