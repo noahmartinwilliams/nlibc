@@ -1,3 +1,4 @@
+#include "types.h"
 int strcmp(char *s1, char *s2) {
 	int x=0, y=0;
 
@@ -133,4 +134,12 @@ int atoi(char *str)
 	ret:
 	number*=neg;
 	return number;
+}
+
+size_t strlen(char *s) 
+{
+	int x;
+	for (x=0; s[x]!='\0'; x++) {
+	}
+	return x;
 }

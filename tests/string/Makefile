@@ -3,7 +3,7 @@
 INCLUDE=../../include
 include ../../include/config.mk
 
-test: test-strcmp test-atoi
+test: test-strcmp test-atoi test-strlen
 	echo "string tests complete"
 
 test-%: %.c ../../libc.a ../../arch/asm.a ../../include/stddef.h
