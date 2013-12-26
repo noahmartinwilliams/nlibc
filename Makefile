@@ -10,6 +10,9 @@ tests: test-loader test-file test-string test-proc  test-assert test-memory test
 libc.so: libc.a arch/asm.a
 	$(SHARE)
 
+libm.so: libm.a
+	$(SHARE)
+
 test-loader:
 	$(MAKE) -is -C tests/loader/ test
 
@@ -28,11 +31,14 @@ test-proc:
 test-memory:
 	$(MAKE) -is -C tests/memory/ test
 
-test-math:
+test-math: libm.a
 	$(MAKE) -is -C tests/math/ test
 
 
-libc.a: string.o file.o assert.o errno.o memory.o math.o
+libc.a: string.o file.o assert.o errno.o memory.o
+	$(AR)
+
+libm.a: math.o
 	$(AR)
 
 arch/asm.a:
