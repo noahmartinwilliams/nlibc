@@ -3,6 +3,8 @@
 INCLUDE=./include
 include ./include/config.mk
 
+main: tests libm.so libc.so
+	echo "compilation complete"
 
 tests: test-loader test-file test-string test-proc  test-assert test-memory test-math
 	echo "tests complete"
