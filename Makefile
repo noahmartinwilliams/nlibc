@@ -44,7 +44,7 @@ libm.a: math.o
 arch/asm.a:
 	$(MAKE) -C arch/ asm.a
 
-%.o: %.c include/stddef.h
+%.o: %.c $(shell $(CC) -MM $< 2>/dev/null | cut -f 2 -d ':')
 	$(CMP)
 	
 
