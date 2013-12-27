@@ -3,7 +3,7 @@
 INCLUDE=../../include
 include ../../include/config.mk
 
-test: test-mmap2 test-mmap2-anon test-sbrk2 test-sbrk
+test: test-mmap2 test-mmap2-anon test-sbrk2 test-sbrk test-mprotect
 	echo "memory tests complete"
 
 test-%: %.c $(shell $(CC) -MM $< 2>/dev/null | cut -f 2 -d ':') ../../libc.a ../../arch/asm.a ../../include/stddef.h

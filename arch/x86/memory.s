@@ -38,3 +38,22 @@ sbrk2:
 
 	popl %ebp
 	ret
+
+.globl mprotect
+.type mprotect, @function
+mprotect:
+	pushl %ebp
+	movl %esp, %ebp
+	.equ addr, 8
+	.equ len, 12
+	.equ protect, 16
+
+	movl $125, %eax
+	movl addr(%ebp), %ebx
+	movl len(%ebp), %ecx
+	movl protect(%ebp), %edx
+	int $0x80
+
+	movl %ebp, %esp
+	popl %ebp
+	ret
