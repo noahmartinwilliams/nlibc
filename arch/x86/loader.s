@@ -18,6 +18,7 @@ _start:
 
 	continue:
 	addl $4, %edx
+	#edx now points to the start of envp
 
 	movl %edx, %ecx
 	pushl %edx

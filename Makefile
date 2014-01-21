@@ -43,7 +43,7 @@ libc.a: string.o file.o assert.o errno.o memory.o
 libm.a: math.o
 	$(AR)
 
-arch/asm.a:
+arch/asm.a: 
 	$(MAKE) -C arch/ asm.a
 
 %.o: %.c $(shell $(CC) -MM $< 2>/dev/null | cut -f 2 -d ':')

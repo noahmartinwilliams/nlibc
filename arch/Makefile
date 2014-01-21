@@ -8,7 +8,7 @@ ASMINCLUDE=$(realpath ./$(ARC)/include)
 asm.a: loader.o file.o proc.o memory.o handle_auxv.o
 	$(AR)
 
-%.o: $(ARC)/%.c
+%.o: $(ARC)/%.c $($(CC) -MM $< 2>/dev/null | cut -f 2 -d ':')
 	$(CMP)
 
 %.o: $(ARC)/%.s
