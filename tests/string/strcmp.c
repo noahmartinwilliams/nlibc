@@ -1,18 +1,13 @@
 #include "string.h"
+#include "assert.h"
 
 int main()
 {
-	char a[]={"hello"};
-	char b[]={"hello"};
-	char c[]={"not hello"};
+	char *a=&"hello";
+	char *b=&"iello";
 
-	if (strcmp(a, b)) {
-		return 1;
-	} else {
-		if (strcmp(a, c)< 0) {
-			return 0;
-		} else {
-			return 1;
-		}
-	}
+	assert((strcmp(a, b) < 0));
+	assert((strcmp(b, a) > 0));
+	assert((strcmp(a, a) == 0));
+	return 0;
 }
