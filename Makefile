@@ -60,6 +60,7 @@ clean:
 	$(MAKE) -C tests/string clean
 	$(MAKE) -C tests/proc clean
 	$(MAKE) -C tests/memory clean
+	$(MAKE) -C tests/loader clean
 	rm -f *.o
 	rm -f *.so
 	rm -f test-*
