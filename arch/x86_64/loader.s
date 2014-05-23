@@ -4,7 +4,12 @@
 .globl _start
 
 _start:
-	movq $0, %rbp
+	movq $0, %rax
+	#movq $0, %rdi
+	#movl (%rsp), %edi
+	#addq $4, %rsp
+	popq %rdi
+	movq %rsp, %rsi
 	call main
 
 	movq %rax, %rdi

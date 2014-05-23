@@ -5,7 +5,6 @@ write:
 	pushq %rbp
 	movq %rsp, %rbp
 	.equ size, 16
-
 	movq $1, %rax
 
 	syscall
