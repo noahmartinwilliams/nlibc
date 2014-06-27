@@ -5,13 +5,9 @@
 exit:
 	pushq %rbp
 	movq %rsp, %rbp
-	.equ status, 8
-	movq status(%rbp), %rdi
 	movq $60, %rax
 	syscall
 
-	movq %rbp, %rsp
-	popq %rbp
 	ret
 
 #.globl getgid

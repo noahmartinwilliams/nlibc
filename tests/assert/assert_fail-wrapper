@@ -4,7 +4,7 @@
 
 RET=$?
 
-if [ "$RET" = 135 ];
+if [ "$RET" = 134 ];
 then
 	exit 0;
 else
