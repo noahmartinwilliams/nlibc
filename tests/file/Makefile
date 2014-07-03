@@ -19,7 +19,7 @@ test-%: %.c $(shell $(CC) -MM $< 2>/dev/null | cut -f 2 -d ':') ../../libc.a ../
 ../../libc.a: 
 	$(MAKE) -C ../../ libc.a
 
-../../arch/asm.a: 
+../../arch/asm.a: ../../arch/$(ARC)/*
 	$(MAKE) -C ../../arch/ asm.a
 
 clean:
