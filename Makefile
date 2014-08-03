@@ -9,7 +9,7 @@ main: tests libm.so libc.so
 tests: test-loader test-file test-string test-proc  test-assert test-memory test-math
 	echo "tests complete"
 
-libc.so: libc.a arch/asm.a
+libc.so: libc.a  arch/asm.a
 	$(SHARE)
 
 libm.so: libm.a
