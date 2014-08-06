@@ -1,6 +1,10 @@
 *.a
 *.o
 *.so
+*.log
+Makefile
+tests/*/Makefile
+arch/Makefile
 tests/*/test-*
 !tests/*/test-*-wrapper
 tests/*/tmp/*
