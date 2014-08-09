@@ -1,5 +1,6 @@
 #! /bin/bash
 
+source ../../include/tmp.sh
 touch tmp/xyzzy
 touch tmp/xyzzy3
 mkdir tmp/xyzzy4
