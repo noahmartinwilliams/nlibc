@@ -9,7 +9,7 @@ main: tests libm.so libc.so
 tests: test-loader test-file test-string test-proc  test-assert test-memory test-math
 	echo "tests complete"
 
-libc.so: libc.a  arch/asm.a
+libc.so: libc.a
 	$(SHARE)
 
 libm.so: libm.a
@@ -37,7 +37,7 @@ test-math: libm.a
 	$(MAKE) -is -C tests/math/ test
 
 
-libc.a: string.o file.o assert.o errno.o memory.o
+libc.a: string.o file.o assert.o errno.o memory.o arch/asm.a
 	$(AR)
 
 libm.a: math.o
