@@ -1,0 +1,18 @@
+.TH NLIBC-TESTS	7 "AUGUST 20" NLIBC
+.SH DESCRIPTION
+This document describes the test system in use for nlibc.
+.SH DIRECTORY LAYOUT
+All tests are located in the tests/ directory and are further split up by category into subdirectories.
+.SH MAKEFILES
+Every testing directory has its own makefile. This makefile contains targets for the libc.a, and asm.a files located in the project root directory.
+The makefiles in each of these subdirectories recognizes the "test" target; however it will print out some ugly crap when you try to do the test from within a testing
+directory. 
+.SH ADDING TESTS
+In order to add a test to a testing category simply create add "test-<your test name here>" as a dependency to the test target in Makefile.in.
+If you want to add a wrapper script to call up your test then simply label it "<your test name here>-wrapper". The test result is given by the return value. A non-zero
+return value indicates that the test has failed, and obviously a zero return value indicates that the test succeeded.
+.SH TEST FEATURES
+If your test wrapper is a bash script, it can source include/tmp.sh (relative to the root directory of the project) in order to get some functions for dealing with
+temporary files. This tmp.sh will offer you a function called "newdir" which will create a new directory, and a function called "newfile" which will create a new file.
+Unfortunately at this moment there is no system in place for ensuring that all files names are unique so you should probably include the name of your test in any
+file/folder names that you make.
