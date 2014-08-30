@@ -10,6 +10,16 @@ _start:
 	#addq $4, %rsp
 	popq %rdi
 	movq %rsp, %rsi
+	movq %rsp, %rdx
+	test:
+	cmpq $0, (%rdx)
+	je continue
+	addq $8, %rdx
+	jmp test
+
+
+	continue:
+	addq $8, %rdx
 	call main
 
 	movq %rax, %rdi
