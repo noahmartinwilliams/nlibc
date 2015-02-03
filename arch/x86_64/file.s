@@ -18,13 +18,12 @@ write:
 
 close:
 	pushq %rbp
-	movl %esp, %ebp
+	movq %rsp, %rbp
 	.equ fd, 8
 
-	movl $6, %eax
-	movl fd(%ebp), %ebx
-	int $0x80
-	movl %ebp, %esp
+	movq $3, %rax
+	syscall
+	movq %rbp, %rsp
 	popq %rbp
 	ret
 
