@@ -32,16 +32,14 @@ close:
 
 creat:
 	pushq %rbp
-	movl %esp, %ebp
+	movq %rsp, %rbp
 	.equ name, 8
 	.equ mode, 12
 	
-	movl $8, %eax
-	movl name(%ebp), %ebx
-	movl mode(%ebp), %ecx
-	int $0x80
+	movq $85, %rax
+	syscall
 
-	movl %ebp, %esp
+	movq %rbp, %rsp
 	popq %rbp
 	ret
 
