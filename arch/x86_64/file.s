@@ -48,13 +48,11 @@ creat:
 
 umask:
 	pushq %rbp
-	movl %esp, %ebp
-	.equ mode, 8
+	movq %rsp, %rbp
 
-	movl $60, %eax
-	movl mode(%ebp), %ebx
-	int $0x80
-	movl %ebp, %esp
+	movq $95, %rax
+	syscall
+	movq %rbp, %rsp
 	popq %rbp
 	ret
 
