@@ -61,16 +61,14 @@ umask:
 
 chmod:
 	pushq %rbp
-	movl %esp, %ebp
+	movq %rsp, %rbp
 	.equ name, 8
 	.equ mode, 12
 
-	movl name(%ebp), %ebx
-	movl mode(%ebp), %ecx
-	movl $15, %eax
-	int $0x80
+	movq $90, %rax
+	syscall
 
-	movl %ebp, %esp
+	movq %rbp, %rsp
 	popq %rbp
 	ret
 
