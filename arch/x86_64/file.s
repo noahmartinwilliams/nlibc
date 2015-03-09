@@ -77,17 +77,11 @@ chmod:
 
 read:
 	pushq %rbp
-	movl %esp, %ebp
-	.equ fd, 8
-	.equ buf, 12
-	.equ size, 16
-	movl $3, %eax
-	movl fd(%ebp), %ebx
-	movl buf(%ebp), %ecx
-	movl size(%ebp), %edx
-	int $0x80
+	movq %rsp, %rbp
+	movq $0, %rax
+	syscall
 
-	movl %ebp, %esp
+	movq %rbp, %rsp
 	popq %rbp
 	ret
 
@@ -125,12 +119,10 @@ getcwd:
 .type chdir, @function
 chdir:
 	pushq %rbp
-	movl %esp, %ebp
-	.equ path, 8
-	movl path(%ebp), %ebx
-	movl $12, %eax
-	int $0x80
+	movq %rsp, %rbp
+	movq $80, %rax
+	syscall
 
-	movl %ebp, %esp
+	movq %rbp, %rsp
 	popq %rbp
 	ret
