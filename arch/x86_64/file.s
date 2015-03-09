@@ -95,18 +95,12 @@ read:
 .type open, @function
 open:
 	pushq %rbp
-	movl %esp, %ebp
-	.equ name, 8
-	.equ flags, 12
-	.equ mode, 16
+	movq %rsp, %rbp
 
-	movl name(%ebp), %ebx
-	movl flags(%ebp), %ecx
-	movl mode(%ebp), %edx
-	movl $5, %eax
-	int $0x80
+	movq $2, %rax
+	syscall
 
-	movl %ebp, %esp
+	movq %rbp, %rsp
 	popq %rbp
 	ret
 
