@@ -102,16 +102,11 @@ open:
 .type getcwd, @function
 getcwd:
 	pushq %rbp
-	movl %esp, %ebp
-	.equ buf, 8
-	.equ size, 12
-	
-	movl buf(%ebp), %ebx
-	movl size(%ebp), %ecx
-	movl $183, %eax
-	int $0x80
+	movq %rsp, %rbp
+	movq $79, %rax
+	syscall
 
-	movl %ebp, %esp
+	movq %rbp, %rsp
 	popq %rbp
 	ret
 
