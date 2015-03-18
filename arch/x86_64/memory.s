@@ -30,11 +30,9 @@ mmap2:
 sbrk2:
 	pushq %rbp
 	movq %rsp, %rbp
-	.equ addr, 8
 
-	movq addr(%rbp), %rbx
-	movq $45, %rax
-	int $0x80
+	movq $12, %rax
+	syscall
 
 	popq %rbp
 	ret

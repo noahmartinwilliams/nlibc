@@ -5,11 +5,8 @@ include ../include/config.mk
 ASMINCLUDE=$(realpath ./$(ARC)/include)
 
 
-asm.a: loader.o file.o proc.o file.o
+asm.a: loader.o file.o proc.o file.o memory.o
 	$(AR)
-
-loader.o: $(ARC)/loader.s
-	$(AS)
 
 %.o: $(ARC)/%.c $($(CC) -MM $< 2>/dev/null | cut -f 2 -d ':')
 	$(CMP)
