@@ -10,16 +10,16 @@ exit:
 
 	ret
 
-#.globl getgid
-#.type getgid, @function
-#
-#getgid:
-	#pushl %ebp
-	#movl %esp, %ebp
-#
-	#movl $47, %eax
-	#int $0x80
-#
-	#movl %ebp, %esp
-	#popl %ebp
-	#ret
+.globl getgid
+.type getgid, @function
+
+getgid:
+	pushq %rbp
+	movq %rsp, %rbp
+
+	movq $104, %rax
+	syscall
+
+	movq %rbp, %rsp
+	popq %rbp
+	ret
