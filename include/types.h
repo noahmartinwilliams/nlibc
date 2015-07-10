@@ -1,6 +1,7 @@
 #ifndef __TYPES_H__
 #define __TYPES_H__
 
+#define alignof(x) __alignof__(x)
 typedef unsigned int size_t;
 typedef unsigned int mode_t;
 typedef unsigned int off_t;
