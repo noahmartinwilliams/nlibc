@@ -3,7 +3,7 @@ CC=gcc -I $(INCLUDE) -ffreestanding -nostdlib -nodefaultlibs
 OBJ=$$(echo "$^" | sed 's/[[:space:]\+]/\n/g' | grep '.*\.[aoc]' | sed 's/\n/ /g')
 CMP=if ( stat -c='%A' $(OBJ) | grep T 2>/dev/null >/dev/null) ; then $(CC) -gstabs -c $(OBJ) -o $@ ; else $(CC) -c $(OBJ) -o $@ ; fi
 CMB=$(CC) $(OBJ) -o $@ 
-ARC=$(shell uname -p)
+ARC=$(shell uname -m)
 LD=ld $^ -o $@
 AS=if (stat -c='%A' $^ | grep T 2>/dev/null >/dev/null ) ; then as -I $(ASMINCLUDE) -gstabs $^ -o $@ ; else as -I $(ASMINCLUDE) $^ -o $@ ; fi
 AR=ar rc $@ $^
